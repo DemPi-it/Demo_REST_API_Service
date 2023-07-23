@@ -24,4 +24,10 @@ public class FilmEntity {
         this.genre = genre;
         this.duration = duration;
     }
+    public void switchFilm(FilmEntity film){
+        setTitle(film.getTitle());
+        setYearOfRelease(film.yearOfRelease);
+        setGenre(film.getGenre());
+        setDuration(film.getDuration());
+    }
 }
