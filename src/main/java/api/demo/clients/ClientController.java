@@ -51,8 +51,8 @@ public class ClientController {
             return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Клиента с таким ID не существует");
         }
         ClientEntity.nextId.decrementAndGet();
-        ClientEntity oldCleint = oldClientInfo.get();
-        oldCleint.switchInfo(client);
+        ClientEntity oldClient = oldClientInfo.get();
+        oldClient.switchInfo(client);
         return ResponseEntity.status(HttpStatus.OK).body(client);
     }
 }
