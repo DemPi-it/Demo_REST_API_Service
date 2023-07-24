@@ -11,6 +11,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 @EqualsAndHashCode
 public class ClientEntity {
     static AtomicInteger nextId = new AtomicInteger();
+    @EqualsAndHashCode.Exclude
     private Integer id;
     private Integer ticketId;
     private String visitDate;
@@ -23,5 +24,11 @@ public class ClientEntity {
         this.visitDate = visitDate;
         this.phoneNumber = phoneNumber;
         this.email = email;
+    }
+    public void switchInfo(ClientEntity client){
+        setTicketId(client.getTicketId());
+        setVisitDate(client.getVisitDate());
+        setPhoneNumber(client.getPhoneNumber());
+        setEmail(client.getEmail());
     }
 }
