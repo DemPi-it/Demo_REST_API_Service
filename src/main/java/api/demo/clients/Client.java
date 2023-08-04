@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.Hibernate;
 
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -26,6 +25,7 @@ public class Client {
     private String phoneNumber;
     @Column(name = "email")
     private String email;
+    @JsonIgnore
     @OneToMany(mappedBy = "clients")
     Set<Ticket> tickets;
 

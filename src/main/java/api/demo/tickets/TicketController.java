@@ -12,4 +12,5 @@ public class TicketController extends BaseCrudController<Ticket, TicketRepositor
     public TicketController(TicketRepository repository) {
         super(repository);
     }
+
 }

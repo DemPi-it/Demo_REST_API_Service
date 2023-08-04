@@ -23,7 +23,7 @@ public class BaseCrudController<E, R extends JpaRepository<E, Integer>> {
     public @ResponseBody Iterable<E> getAll(){
         return repository.findAll();
     }
-    @GetMapping("/{id}")
+    @GetMapping("/id/{id}")
     public ResponseEntity<?> getById(@PathVariable Integer id) {
         return new Result<>(
                 repository.findById(id),
@@ -45,6 +45,7 @@ public class BaseCrudController<E, R extends JpaRepository<E, Integer>> {
         );
     }
 
+
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> removeById(@PathVariable Integer id){
         var entity = repository.findById(id);
@@ -52,5 +53,6 @@ public class BaseCrudController<E, R extends JpaRepository<E, Integer>> {
         repository.delete(entity.get());
         return ok("Deleted successful");
     }
+
 
 }

@@ -1,6 +1,7 @@
 package api.demo.employee;
 
 import api.demo.tickets.Ticket;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.Hibernate;
@@ -17,7 +18,7 @@ public class Employee {
     @Id
     @Column(name="employee_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private Integer employeeId;
     @Column(name="first_name")
     private String firstName;
     @Column(name="second_name")
@@ -30,6 +31,7 @@ public class Employee {
     private String email;
     @Column(name="address")
     private String address;
+    @JsonIgnore
     @OneToMany(mappedBy = "employees")
     List<Ticket> tickets;
 
@@ -49,7 +51,7 @@ public class Employee {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
         Employee that = (Employee) o;
-        return id != null && Objects.equals(id, that.id);
+        return employeeId != null && Objects.equals(employeeId, that.employeeId);
     }
 
     @Override

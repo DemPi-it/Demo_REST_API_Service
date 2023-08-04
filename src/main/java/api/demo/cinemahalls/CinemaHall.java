@@ -2,6 +2,7 @@ package api.demo.cinemahalls;
 
 import api.demo.cinemas.Cinema;
 import api.demo.tickets.Ticket;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,7 +21,7 @@ public class CinemaHall {
     @Id
     @Column(name="cinema_hall_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private Integer hallId;
     @Column(name="cinema_hall_name")
     private String hallName;
     @Column(name="capacity")
@@ -28,8 +29,10 @@ public class CinemaHall {
     @Column(name="status")
     private String status;
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name="id", nullable=false)
     private Cinema cinemas;
+    @JsonIgnore
     @OneToMany(mappedBy = "cinema_halls")
     private List<Ticket> tickets;
 
@@ -38,7 +41,7 @@ public class CinemaHall {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
         CinemaHall that = (CinemaHall) o;
-        return id != null && Objects.equals(id, that.id);
+        return hallId != null && Objects.equals(hallId, that.hallId);
     }
 
     @Override

@@ -2,7 +2,13 @@ package api.demo.clients;
 
 import api.demo.BaseCrudController;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+import static org.springframework.http.ResponseEntity.badRequest;
+import static org.springframework.http.ResponseEntity.ok;
 
 @RestController
 @RequestMapping("clients")
@@ -12,15 +18,25 @@ public class ClientController extends BaseCrudController<Client, ClientsReposito
         super(repository);
     }
 
-    @GetMapping("/phone")
-    public Client getClientByPhoneNumber(@RequestParam String phoneNumber){
+    @GetMapping("/phone/{phone}")
+    public Client getClientByPhoneNumber(@PathVariable String phoneNumber){
         return repository.findByPhoneNumber(phoneNumber);
     }
 
-    @GetMapping("/email")
-    public Client getClientByEmail(@RequestParam String email){
+    @GetMapping("/email/{email}")
+    public List<Client> getClientByEmail(@PathVariable String email){
         return repository.findByEmail(email);
     }
 
-
+    @PutMapping("/update/{id}")
+    public ResponseEntity<?> updateClientInfo(@PathVariable Integer id, @RequestBody Client client){
+        var oldClient = repository.findById(id);
+        if(oldClient.isEmpty()){ return badRequest().body("No entity with this id "+id); }
+        Client oldClientInfo = oldClient.get();
+        oldClientInfo.setId(id);
+        oldClientInfo.setEmail(client.getEmail());
+        oldClientInfo.setPhoneNumber(client.getPhoneNumber());
+        repository.save(oldClientInfo);
+        return ok(oldClient);
+    }
 }
