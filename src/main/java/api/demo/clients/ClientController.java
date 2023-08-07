@@ -19,7 +19,7 @@ public class ClientController extends BaseCrudController<Client, ClientsReposito
     }
 
     @GetMapping("/phone/{phone}")
-    public Client getClientByPhoneNumber(@PathVariable String phoneNumber){
+    public List<Client> getClientByPhoneNumber(@PathVariable String phoneNumber){
         return repository.findByPhoneNumber(phoneNumber);
     }
 

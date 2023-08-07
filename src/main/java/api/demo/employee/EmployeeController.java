@@ -16,11 +16,11 @@ public class EmployeeController extends BaseCrudController<Employee, EmployeeRep
         super(repository);
     }
 
-    @GetMapping("/{phoneNumber}")
+    @GetMapping("/phone/{phoneNumber}")
     public Employee getByPhoneNumber(@PathVariable String phoneNumber){
         return repository.findByPhoneNumber(phoneNumber);
     }
-    @GetMapping("/{email}")
+    @GetMapping("/email/{email}")
     public Employee getByEmail(@PathVariable String email){
         return repository.findByEmail(email);
     }
