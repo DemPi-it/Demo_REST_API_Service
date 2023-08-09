@@ -46,7 +46,7 @@ public class BaseCrudController<E, R extends JpaRepository<E, Integer>> {
     }
 
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/delete/id/{id}")
     public ResponseEntity<?> removeById(@PathVariable Integer id){
         var entity = repository.findById(id);
         if(entity.isEmpty()) return notFoundResponse(id);

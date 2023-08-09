@@ -31,7 +31,7 @@ public class EmployeeController extends BaseCrudController<Employee, EmployeeRep
         repository.deleteByPhoneNumber(phoneNumber);
         return ok("successful deleted");
     }
-    @DeleteMapping("/delete/{email}")
+    @DeleteMapping("/delete/email/{email}")
     public ResponseEntity<?> removeByEmail(@PathVariable String email){
         var employee = repository.findByEmail(email);
         if(employee == null){ return badRequest().body("no employee with that phone number: " + email); }
